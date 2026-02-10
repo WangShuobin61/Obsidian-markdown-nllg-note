@@ -240,3 +240,5 @@ wheelRotation)
 2. 创建 DefectMonitor C++ 类 (实现核心逻辑)
 3. 修改 HTML (添加 JS 接口)
 4. 修改 Area8.qml (接收信号并驱动 Web)
+
+123456
