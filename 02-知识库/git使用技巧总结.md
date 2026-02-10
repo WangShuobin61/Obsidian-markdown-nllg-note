@@ -17,11 +17,11 @@ main        ← 稳定可发布（随时可打包）
 
 ### 各分支职责一句话版
 
-| 分支         | 作用                     |
-| ------------ | ------------------------ |
+| 分支           | 作用            |
+| ------------ | ------------- |
 | **main**     | 永远保持“可运行、可交付” |
-| **develop**  | 日常开发汇总、测试       |
-| **feature/** | 每个人的具体功能开发     |
+| **develop**  | 日常开发汇总、测试     |
+| **feature/** | 每个人的具体功能开发    |
 
 👉 **规则**：
 
@@ -71,20 +71,20 @@ git push -u origin develop
 
 ### 1️⃣ 克隆项目（同事做）
 
-```
+```bash
 git clone <仓库地址>
 cd 项目目录
 ```
 
 ### 2️⃣ 切换到 develop（不是 main）
 
-```
+```bash
 git checkout develop
 ```
 
 如果本地没有 develop：
 
-```
+```bash
 git fetch
 git checkout develop
 ```
@@ -97,7 +97,7 @@ git checkout develop
 
 #### 你要开发“雷达显示功能”
 
-```
+```bash
 git checkout develop
 git pull
 git checkout -b feature/radar-view
@@ -115,7 +115,7 @@ git checkout -b feature/comm-module
 
 ### ✍ 开发 + 提交（各自在自己的 feature 上）
 
-```
+```bash
 git status     //查看当前git状态
 git add .
 git commit -m "feat: 实现雷达视图基础显示"
@@ -133,7 +133,7 @@ git commit -m "feat: 实现雷达视图基础显示"
 
 ### ⬆ 推送 feature 分支到远程
 
-```
+```bash
 git push -u origin feature/radar-view
 
 /* 使用 -u(或 --set-upstream) 参数，Git会记录下本地 feature/radar-view分支与远程 origin/feature/radar-view分支的关联关系。这个跟踪关系一旦建立，会带来直接的便利：
@@ -146,14 +146,14 @@ git push -u origin feature/radar-view
 
 ### 1️⃣ 切回 develop
 
-```
+```bash
 git checkout develop
 git pull
 ```
 
 ### 2️⃣ 合并 feature
 
-```
+```bash
 git merge feature/radar-view
 ```
 

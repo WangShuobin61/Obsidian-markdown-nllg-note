@@ -8,45 +8,18 @@
         "type": "tabs",
         "children": [
           {
-            "id": "651f1dda0063b9cd",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "新标签页"
-            }
-          },
-          {
-            "id": "45536e01c72fe80a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Three.js+ros3Djs 驱动文档.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Three.js+ros3Djs 驱动文档"
-            }
-          },
-          {
             "id": "f69f6c6c9f71c9e9",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf",
               "state": {
-                "file": "02-知识库/git使用技巧总结.md",
-                "mode": "source",
-                "source": false
+                "file": "_attachments/思维导图(双版本)/01-Linux基础.pdf"
               },
-              "icon": "lucide-file",
-              "title": "git使用技巧总结"
+              "icon": "lucide-file-text",
+              "title": "01-Linux基础"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -119,7 +92,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "02-知识库/git使用技巧总结.md",
+                "file": "_attachments/思维导图(双版本)/01-Linux基础.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -129,7 +102,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "git使用技巧总结 的反向链接列表"
+              "title": "01-Linux基础 的反向链接列表"
             }
           },
           {
@@ -221,33 +194,34 @@
   },
   "active": "f69f6c6c9f71c9e9",
   "lastOpenFiles": [
+    "_attachments/思维导图(双版本)/信号.pdf",
+    "02-知识库/Three.js+ros3Djs 驱动文档.md",
+    "_attachments/思维导图(双版本)/信号.xmind",
+    "_attachments/思维导图(双版本)/线程 与 进程间通信.xmind",
+    "_attachments/思维导图(双版本)/线程 与 进程间通信.pdf",
+    "_attachments/思维导图(双版本)/系统IO.xmind",
+    "_attachments/思维导图(双版本)/系统IO.pdf",
+    "_attachments/思维导图(双版本)/文件元信息.pdf",
+    "_attachments/思维导图(双版本)/数组、函数、指针总结.pdf",
+    "_attachments/思维导图(双版本)/数据结构.xmind",
+    "_attachments/思维导图(双版本)/目录系统函数.xmind",
+    "_attachments/未命名.md",
+    "02-知识库/Vim操作命令.md",
+    "02-知识库/git使用技巧总结.md",
+    "02-知识库/Docker技术基础扫盲.md",
+    "01-数字资产库/Linux下 Qt+ROS2 程序的打包与发行.md",
     "03-方案库/RViz视频流方案.md",
     "README.md",
-    "_attachments",
-    "02-知识库/Three.js+ros3Djs 驱动文档.md",
-    "02-知识库/Vim操作命令.md",
     "04-问题库/车轮探伤页面需求.md",
     "04-问题库/Three.js报错问题分析.md",
-    "01-数字资产库/Linux下 Qt+ROS2 程序的打包与发行.md",
-    "03-方案库",
-    "02-知识库/Docker技术基础扫盲.md",
     "05-临时库/urdf编码分析.md",
     "消费报告.md",
-    "04-问题库",
     "01-数字资产库/统信V20 UOS 使用源码构建Qt6环境.md",
     "01-数字资产库/统信V20 UOS 上ROS2源码编译.md",
-    "01-数字资产库",
-    "05-临时库",
-    "02-知识库",
-    "02-知识库/git使用技巧总结.md",
     "clang静态代码审查.md",
     "未命名.canvas",
     "_img/Pasted image 20260209170309.png",
     "_img/1770610168511.png",
-    "_img",
-    "1770608252023.txt",
-    "1770608274947.txt",
-    "1770608355373.txt",
     "Pasted image 20260210133302.png",
     "未命名 2.canvas",
     "未命名 1.canvas",
