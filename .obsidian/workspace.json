@@ -11,14 +11,10 @@
             "id": "651f1dda0063b9cd",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "git使用技巧总结.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "git使用技巧总结"
+              "title": "新标签页"
             }
           },
           {
@@ -39,10 +35,14 @@
             "id": "f69f6c6c9f71c9e9",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "关系图谱"
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "README"
             }
           }
         ],
@@ -119,6 +119,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -128,7 +129,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "反向链接"
+              "title": "README 的反向链接列表"
             }
           },
           {
@@ -218,31 +219,32 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "f69f6c6c9f71c9e9",
+  "active": "9c4ca6b5faaac702",
   "lastOpenFiles": [
-    "方案库/RViz视频流方案.md",
-    "方案库",
-    "知识库/Three.js+ros3Djs 驱动文档.md",
-    "知识库/Docker技术基础扫盲.md",
-    "临时库/urdf编码分析.md",
-    "数字资产库/linux下程序的打包与发行.md",
-    "问题库/Three.js报错问题分析.md",
+    "_attachments",
+    "02-知识库/Three.js+ros3Djs 驱动文档.md",
+    "02-知识库/Vim操作命令.md",
+    "04-问题库/车轮探伤页面需求.md",
+    "04-问题库/Three.js报错问题分析.md",
+    "01-数字资产库/Linux下 Qt+ROS2 程序的打包与发行.md",
+    "03-方案库/RViz视频流方案.md",
+    "03-方案库",
+    "02-知识库/Docker技术基础扫盲.md",
+    "05-临时库/urdf编码分析.md",
     "消费报告.md",
-    "问题库",
-    "数字资产库/统信V20 UOS 使用源码构建Qt6环境.md",
-    "数字资产库/统信V20 UOS 上ROS2源码编译.md",
-    "知识库/Vim操作命令.md",
-    "数字资产库",
-    "临时库",
-    "知识库",
-    "知识库/git使用技巧总结.md",
-    "问题库/车轮探伤页面需求.md",
+    "04-问题库",
+    "01-数字资产库/统信V20 UOS 使用源码构建Qt6环境.md",
+    "01-数字资产库/统信V20 UOS 上ROS2源码编译.md",
+    "01-数字资产库",
+    "05-临时库",
+    "02-知识库",
+    "02-知识库/git使用技巧总结.md",
     "clang静态代码审查.md",
     "README.md",
     "未命名.canvas",
-    "img/Pasted image 20260209170309.png",
-    "img/1770610168511.png",
-    "img",
+    "_img/Pasted image 20260209170309.png",
+    "_img/1770610168511.png",
+    "_img",
     "1770608252023.txt",
     "1770608274947.txt",
     "1770608355373.txt",
