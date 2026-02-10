@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Three.js+ros3Djs 驱动文档.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Three.js+ros3Djs 驱动文档"
+              "title": "README"
             }
           }
         ],
@@ -123,7 +123,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Three.js+ros3Djs 驱动文档.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -133,7 +133,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Three.js+ros3Djs 驱动文档 的反向链接列表"
+              "title": "README 的反向链接列表"
             }
           },
           {
@@ -213,20 +213,21 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "obsidian-git:Open Git source control": false,
       "switcher:打开快速切换": false,
-      "graph:查看关系图谱": false,
-      "canvas:新建白板": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
-      "command-palette:打开命令面板": false,
-      "bases:新建数据库": false
+      "canvas:新建白板": false,
+      "bases:新建数据库": false,
+      "graph:查看关系图谱": false,
+      "obsidian-git:Open Git source control": false,
+      "command-palette:打开命令面板": false
     }
   },
   "active": "f69f6c6c9f71c9e9",
   "lastOpenFiles": [
-    "Vim操作命令.md",
     "Three.js+ros3Djs 驱动文档.md",
+    "README.md",
+    "Vim操作命令.md",
     "未命名.canvas",
     "Three.js报错问题分析.md",
     "RViz视频流方案.md",
