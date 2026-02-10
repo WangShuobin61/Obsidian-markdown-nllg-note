@@ -1,0 +1,247 @@
+{
+  "main": {
+    "id": "caf9c3748a00672a",
+    "type": "split",
+    "children": [
+      {
+        "id": "20060e1be3016929",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "651f1dda0063b9cd",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "git使用技巧总结.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "git使用技巧总结"
+            }
+          },
+          {
+            "id": "45536e01c72fe80a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Three.js+ros3Djs 驱动文档.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Three.js+ros3Djs 驱动文档"
+            }
+          },
+          {
+            "id": "f69f6c6c9f71c9e9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Three.js+ros3Djs 驱动文档.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Three.js+ros3Djs 驱动文档"
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "0fbb079b34ed2d66",
+    "type": "split",
+    "children": [
+      {
+        "id": "a7bab569633d4631",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9c4ca6b5faaac702",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "byCreatedTime",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "ac6ecec1a4c5acaf",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:#include",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "2d5989e1c5bf608e",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "20be42393301308f",
+    "type": "split",
+    "children": [
+      {
+        "id": "389548b1356631b9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "042b3650bd793d34",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Three.js+ros3Djs 驱动文档.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Three.js+ros3Djs 驱动文档 的反向链接列表"
+            }
+          },
+          {
+            "id": "705852c44f66a969",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "RViz视频流方案.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "RViz视频流方案 的出链列表"
+            }
+          },
+          {
+            "id": "3a9f6753f2d32344",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "c9fc0a70b17aefb4",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "598296df8e80d674",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "RViz视频流方案.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "RViz视频流方案 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false
+    }
+  },
+  "active": "f69f6c6c9f71c9e9",
+  "lastOpenFiles": [
+    "Vim操作命令.md",
+    "Three.js+ros3Djs 驱动文档.md",
+    "未命名.canvas",
+    "Three.js报错问题分析.md",
+    "RViz视频流方案.md",
+    "img/Pasted image 20260209170309.png",
+    "img/1770610168511.png",
+    "img",
+    "1770608252023.txt",
+    "1770608274947.txt",
+    "1770608355373.txt",
+    "1770608566520.txt",
+    "git使用技巧总结.md",
+    "从源码构建Qt6环境.md",
+    "车轮探伤页面需求.md",
+    "ROS2源码编译.md",
+    "消费报告.md",
+    "Pasted image 20260210133302.png",
+    "RViz视频流方案.pdf",
+    "未命名.base",
+    "clang静态代码审查.md",
+    "未命名 2.canvas",
+    "未命名 1.canvas",
+    "2026-02-09.md",
+    "options.md",
+    "视频流.md",
+    "Docker技术基础扫盲.md",
+    "linux下程序的打包与发行.md",
+    "urdf编码分析.md",
+    "sub.md"
+  ]
+}
