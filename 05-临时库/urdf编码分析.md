@@ -242,3 +242,4 @@ wheelRotation)
 4. 修改 Area8.qml (接收信号并驱动 Web)
 
 123456
+456789
