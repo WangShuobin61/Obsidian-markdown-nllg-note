@@ -37,12 +37,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "02-知识库/git使用技巧总结.md",
                 "mode": "source",
-                "source": true
+                "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "git使用技巧总结"
             }
           }
         ],
@@ -119,7 +119,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "02-知识库/git使用技巧总结.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -129,7 +129,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "README 的反向链接列表"
+              "title": "git使用技巧总结 的反向链接列表"
             }
           },
           {
@@ -219,15 +219,16 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "9c4ca6b5faaac702",
+  "active": "f69f6c6c9f71c9e9",
   "lastOpenFiles": [
+    "03-方案库/RViz视频流方案.md",
+    "README.md",
     "_attachments",
     "02-知识库/Three.js+ros3Djs 驱动文档.md",
     "02-知识库/Vim操作命令.md",
     "04-问题库/车轮探伤页面需求.md",
     "04-问题库/Three.js报错问题分析.md",
     "01-数字资产库/Linux下 Qt+ROS2 程序的打包与发行.md",
-    "03-方案库/RViz视频流方案.md",
     "03-方案库",
     "02-知识库/Docker技术基础扫盲.md",
     "05-临时库/urdf编码分析.md",
@@ -240,7 +241,6 @@
     "02-知识库",
     "02-知识库/git使用技巧总结.md",
     "clang静态代码审查.md",
-    "README.md",
     "未命名.canvas",
     "_img/Pasted image 20260209170309.png",
     "_img/1770610168511.png",
@@ -248,7 +248,6 @@
     "1770608252023.txt",
     "1770608274947.txt",
     "1770608355373.txt",
-    "1770608566520.txt",
     "Pasted image 20260210133302.png",
     "未命名 2.canvas",
     "未命名 1.canvas",
