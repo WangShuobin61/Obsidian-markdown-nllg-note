@@ -1,3 +1,4 @@
+[[中国信息测评中心自主可控要求 清单]]
 1、Qt for Linux/X11 - 从源代码构建 https://doc.qt.io/qt-6/zh/linux-building.html
 
 2、构建Qt6源代码 https://doc.qt.io/qt-6/zh/build-sources.html

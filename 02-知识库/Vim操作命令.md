@@ -118,3 +118,23 @@
 | `:set number`         | 显示行号              |
 | `:set relativenumber` | 相对行号（开发神器）        |
 | `:noh`                | 清除搜索高亮            |
+
+## 相关索引
+
+仓库内有存在Xmind格式原件
+
+[[线程 与 进程间通信.pdf]] 
+[[系统IO.pdf]]
+[[目录系统函数.pdf]]
+[[标准IO.pdf]]
+[[文件元信息.pdf]]
+[[数组、函数、指针总结.pdf]]
+[[函数.pdf]]
+[[信号.pdf]]
+[[STM32驱动总结.pdf]]
+[[IO.pdf]]
+[[01-Linux基础.pdf]]
+[[02-Linux基础2.pdf]]
+[[UNIX环境高级编程第二版.pdf]]
+[[UNIX环境高级编程第三版.pdf]]
+
