@@ -210,10 +210,6 @@ systemctl --user disable indicator-sysmonitor
 
 ---
 
-如果你愿意，我还能给你一个 **更高级版本**（保证等桌面完全加载后再启动，避免偶尔顶栏不显示的问题）。
-
-你要稳定版本还是极致稳定版本 😄
-
 nllg@LegionR7000:~/my_project/indicator-sysmonitor/build$ which indicator-sysmonitor /usr/bin/indicator-sysmonitor
 
 很好 👍
