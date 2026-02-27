@@ -18,3 +18,10 @@ if (NOT FLUENTUI_QML_PLUGIN_DIRECTORY)
     set(FLUENTUI_QML_PLUGIN_DIRECTORY ${QT_SDK_DIR}/qml/FluentUI)
 endif ()
 ```
+
+```bash
+sudo /opt/Qt/MaintenanceTool
+```
+
+
+

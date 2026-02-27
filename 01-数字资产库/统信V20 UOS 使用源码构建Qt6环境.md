@@ -1,9 +1,11 @@
 [[中国信息测评中心自主可控要求 清单]]
+[[Docker 开发模式技术快速预览与快速扫盲]]
+
 1、Qt for Linux/X11 - 从源代码构建 https://doc.qt.io/qt-6/zh/linux-building.html
 
 2、构建Qt6源代码 https://doc.qt.io/qt-6/zh/build-sources.html
 
-3、从Git仓库中获取Qt6源代码 https://doc.qt.io/qt-6/zh/getting-sources-from-git.html
+3、从Git仓库中获取Qt6源代码 https://doc.qt.io/qt-6/zh/getting-sources-from-git.htm
 
 4、Clang14 https://github.com/llvm/llvm-project/releases?q=14&expanded=true
 

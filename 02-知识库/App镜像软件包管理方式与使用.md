@@ -895,4 +895,4 @@ Exec=bash -c "/home/nllg/AppImage/Obsidian-1.11.7.AppImage"
 
 ---
 
-[[Qt Creator开始菜单启动自动加载环境变量]]
+[[Qt Creator 开始菜单启动自动加载环境变量]]
