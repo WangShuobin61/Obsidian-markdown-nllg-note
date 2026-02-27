@@ -5,7 +5,7 @@
 
 2、构建Qt6源代码 https://doc.qt.io/qt-6/zh/build-sources.html
 
-3、从Git仓库中获取Qt6源代码 https://doc.qt.io/qt-6/zh/getting-sources-from-git.htm
+3、从Git仓库中获取Qt6源代码 https://doc.qt.io/qt-6/zh/getting-sources-from-git.html
 
 4、Clang14 https://github.com/llvm/llvm-project/releases?q=14&expanded=true
 

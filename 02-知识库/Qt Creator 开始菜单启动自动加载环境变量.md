@@ -7,11 +7,8 @@
 **现象本质：**
 
 - 终端启动 → 继承了你 `.bashrc` / `.profile` 里的环境变量
-    
 - 开始菜单启动 → 不一定加载这些 shell 配置
-    
 - 所以 Qt Creator 找不到某些 PATH / CMAKE / ROS / 自定义变量
-    
 
 ---
 
