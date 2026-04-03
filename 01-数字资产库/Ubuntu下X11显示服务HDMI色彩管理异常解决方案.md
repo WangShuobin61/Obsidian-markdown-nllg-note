@@ -18,6 +18,12 @@ HDMI-0: 1920x1080_100 +1920+0 {ForceFullCompositionPipeline=On, ColorSpace=RGB, 
 
 ```
 
+## 已创建的文件
+
+1. 脚本：`/home/nllg/.local/bin/nvidia-metamode-prompt.sh`
+    - 用 `zenity` 弹窗；选「是」执行你那条 `CurrentMetaMode=...`；成功/失败再给一个小提示。
+2. 自启动项：`/home/nllg/.config/autostart/nvidia-metamode-prompt.desktop`
+    - 用户登录 GNOME/Ubuntu 桌面后会自动运行上述脚本。
 ### 命令分析
 ## 🔵 xrandr 能控制：
 

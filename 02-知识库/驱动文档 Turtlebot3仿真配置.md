@@ -3,7 +3,8 @@
 sudo apt-get install ros-humble-turtlebot3* -y
 
 2.下载gazebo模型:
-mkdir -p ~/.gazebocd ~/.gazebo/
+mkdir -p ~/.gazebo
+cd ~/.gazebo/
 git clone https://github.com/osrf/gazebo_models models
 rm -rf models/.git
 
@@ -24,7 +25,7 @@ ros2 launch turtlebot3_cartographer cartographer.launch.py
 ros2 run nav2_map_server map_saver_cli -f ~/hourse
 
 8.运行导航节点:
-ros2 launch turtlebot3_navigation2 navigation2.launch.py map:=/home/wangshuobin/hourse.yaml
+ros2 launch turtlebot3_navigation2 navigation2.launch.py map:=/home/nllg/my_project/sx_GasControl_qt/map/hourse.yaml.yaml
 ```
 
 ![[微信图片_20251212165533_121_2.png]]
