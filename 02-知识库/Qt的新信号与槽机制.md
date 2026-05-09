@@ -278,7 +278,7 @@ Qt 的 signal/slot：
 
 其实还是依赖：
 
-- moc（Meta Object Compiler）
+- moc（Meta Object Compiler）元对象编译器
 - 元对象系统
 
 即使是新语法：
