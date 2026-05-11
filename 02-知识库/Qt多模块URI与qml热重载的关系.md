@@ -110,13 +110,13 @@ Debug 时 import path = `src/`，URI = `WheelScanning.ModuleA`，所以 Qt 必
 
 具体改动：
 
-|模块|原 URI|新 URI|源码目录|
-|---|---|---|---|
-|根模块|`WheelScanning.App`|`App`（或把 `src/app` 改名为 `src/App`，二者择一以匹配大小写）|`src/app`|
-|modeStyle|`WheelScanning.ModeStyle`|`modeStyle`|`src/modeStyle`|
-|moduleA|`WheelScanning.ModuleA`|`moduleA`|`src/moduleA`|
-|moduleB|`WheelScanning.ModuleB`|`moduleB`|`src/moduleB`|
-|viewmodels|`WheelScanning.ViewModels`|`viewmodels`|`src/viewmodels`|
+| 模块         | 原 URI                      | 新 URI                                        | 源码目录             |
+| ---------- | -------------------------- | -------------------------------------------- | ---------------- |
+| 根模块        | `WheelScanning.App`        | `App`（或把 `src/app` 改名为 `src/App`，二者择一以匹配大小写） | `src/app`        |
+| modeStyle  | `WheelScanning.ModeStyle`  | `modeStyle`                                  | `src/modeStyle`  |
+| moduleA    | `WheelScanning.ModuleA`    | `moduleA`                                    | `src/moduleA`    |
+| moduleB    | `WheelScanning.ModuleB`    | `moduleB`                                    | `src/moduleB`    |
+| viewmodels | `WheelScanning.ViewModels` | `viewmodels`                                 | `src/viewmodels` |
 
 每个 `qt_add_qml_module(...)` 改成：
 
@@ -152,6 +152,7 @@ src/*/*.qmltypes
 ---
 
 ### 方案 B：保留现有 URI，用 URL 拦截器实现热重载（推荐，改动最小）
+[[Qt多模块URI与qml热重载的关系(方案B)]]
 
 这是 Qt 官方处理 "release 用 qrc、debug 用源文件" 的标准玩法，无需改 URI、无需改 CMake、不需要任何符号链接。
 
@@ -226,3 +227,4 @@ int main(int argc, char *argv[]) {
 如果你想改动最小、保持现有命名空间感，选方案 B——只改 `main.cpp` 一处，删一组符号链接就完事，是 Qt 项目里最通行的热重载做法。
 
 你倾向哪一种？我可以直接给你完整改动 patch。
+
