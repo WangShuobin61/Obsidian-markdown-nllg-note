@@ -1,3 +1,7 @@
+```bash
+sudo /opt/Qt/MaintenanceTool --mirror https://mirrors.aliyun.com/qt
+```
+
 以下是从 CMake Release 构建到 AppImage 打包完成的完整命令流程总结。这个过程将您的源代码转化为了一个可在任何 Linux 系统上直接运行的独立程序包。
 
 或许你可以试试：[[Docker 开发模式技术快速预览与快速扫盲]]
