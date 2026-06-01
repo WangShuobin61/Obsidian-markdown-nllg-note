@@ -1,3 +1,9 @@
+生成.ts 的xml翻译文件
+```bash
+cmake --build ./build/Clang14_Qt_6_10_2-Debug --target update_translations
+```
+
+解释这段代码
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
@@ -18,7 +24,6 @@
 ```
 
 
-解释这段代码
 
 这是一段 **Qt 国际化（i18n）翻译文件 TS（Translation Source）** 的内容，通常由 Qt Linguist 工具维护，用于将程序界面中的文字翻译成不同语言。
 
