@@ -512,3 +512,85 @@ zh_CN.tsen_US.tsja_JP.ts
 6. 动态切换语言时重新安装 Translator，并调用 `retranslateUi()` 刷新界面。
 
 这基本就是标准答案。
+
+`i18n` 是 **internationalization（国际化）** 的缩写。
+
+它的构成方式是：
+
+```
+i + 18个字母 + n
+```
+
+因为：
+
+```
+internationalization
+```
+
+单词长度为 20 个字母：
+
+```
+i n t e r n a t i o n a l i z a t i o n↑                                   ↑第1个字母                         最后1个字母
+```
+
+去掉首尾两个字母后，中间剩下 18 个字母：
+
+```
+i + 18 + n↓         ↓i18n
+```
+
+---
+
+类似的缩写在软件行业非常常见：
+
+|缩写|全称|含义|
+|---|---|---|
+|i18n|internationalization|国际化|
+|l10n|localization|本地化|
+|g11n|globalization|全球化|
+|a11y|accessibility|无障碍访问|
+|k8s|Kubernetes|Kubernetes|
+|e2e|end-to-end|端到端|
+
+---
+
+例如：
+
+### l10n
+
+```
+localization
+```
+
+首尾：
+
+```
+l          n
+```
+
+中间：
+
+```
+ocalizatio
+```
+
+共 10 个字母
+
+所以：
+
+```
+l10n
+```
+
+表示：
+
+**本地化**
+
+例如：
+
+- 中文翻译
+- 日文翻译
+- 不同国家日期格式
+- 货币格式适配
+
+都属于 Localization。
