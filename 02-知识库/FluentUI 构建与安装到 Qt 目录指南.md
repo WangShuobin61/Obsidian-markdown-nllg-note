@@ -18,6 +18,12 @@ cmake --preset clang_rel \
   -DFLUENTUI_QML_PLUGIN_DIRECTORY=${PWD}/build/Clang14_Qt_6_10_3-Release/FluentUI
 ```
 
+或者：
+```shell
+cmake --preset clang_rel \
+  -DCMAKE_PREFIX_PATH=/opt/Qt/6.10.3/gcc_64 \
+  -DFLUENTUI_QML_PLUGIN_DIRECTORY=${PWD}/build/Clang14_Qt_6_10_3-Release/FluentUI
+```
 **重要提示：**
 - ❌ 不要使用 `sudo` 执行 configure 命令
 - ❌ 不要在 configure 时设置 `-DCMAKE_INSTALL_PREFIX`
