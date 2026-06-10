@@ -89,6 +89,12 @@ cd ~/Desktop/qt/qt-build
 rm -rf *   
 ```
 
+更好的方式是：
+
+```txt
+iny
+```
+
 ------
 
 ## 第二步：清空 build 目录
