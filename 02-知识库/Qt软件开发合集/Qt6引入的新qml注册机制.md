@@ -1,4 +1,4 @@
-是的，`wheel_scanning` 项目用的就是纯声明式宏注册（比方式2更彻底）：
+[[Qt6 QML 宏机制]]
 
 注册方式：在 C++ 头文件中直接用 `QML_ELEMENT` + `QML_SINGLETON` 宏声明，不需要 `main.cpp` 中手动调用任何注册函数。
 
