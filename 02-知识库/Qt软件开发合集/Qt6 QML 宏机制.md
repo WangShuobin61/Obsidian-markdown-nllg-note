@@ -1,4 +1,4 @@
-```qml
+```cpp
 #ifndef AUTHMANAGER_H
 #define AUTHMANAGER_H
 
@@ -73,3 +73,4 @@ private:
 
 #endif // AUTHMANAGER_H
 ```
+
