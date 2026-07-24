@@ -9,7 +9,7 @@
 
 4、Clang14 https://github.com/llvm/llvm-project/releases?q=14&expanded=true
 
-## 1️⃣ 下载
+## 1️⃣ 下载 [auth-manager-security.md](\\wsl.localhost\Ubuntu-22.04-LTS\home\wangshuobin\project\gas_control_ws\src\gas_control_bringup\doc\Technical report\auth-manager-security.md) 
 
 在浏览器里点：
 
