@@ -1,0 +1,74 @@
+### cursor-tool-params.mdc
+---
+description: Cursor 文件工具参数名规范，防止 Read path is required 错误
+alwaysApply: true
+---
+
+# Cursor 文件工具参数名规范
+
+## 强制约束
+
+调用以下工具时，路径参数名**必须**用 `path`，**禁止**用 `file_path`：
+
+- `Read` → 参数 `path`（非 `file_path`）
+- `Write` → 参数 `path` + `text`（**两者都必传**，`path` 非 `file_path`）
+- `PatchEdit` → 参数 `path` + `old_string` + `new_string`（`path` 非 `file_path`）
+- `Delete` → 参数 `path`（非 `file_path`）
+
+```
+# ❌ 错误
+Read(file_path="/abs/path/to/file.cpp")
+Write(path="/abs/path/to/file.cpp")          # 漏掉 text
+
+# ✅ 正确
+Read(path="/abs/path/to/file.cpp")
+Write(path="/abs/path/to/file.cpp", text="文件完整内容")
+```
+
+## Write 专项：禁止漏传 text
+
+`Write` 的 `text` 是**内容主体**，缺失会导致 `decode write args failed` 或写空文件。
+
+- 每次调用 `Write` 前，先确认参数里同时含 `path` 和 `text`。
+- `text` 为空字符串仅在“有意清空文件”时才允许，其余情况非空。
+- 已有文件优先用 `PatchEdit` 局部替换，从根本上避开整体 `Write` 的 `text` 遗漏风险。
+
+## 报错诊断：`decode ... args failed` 不等于"漏传参数"
+
+`decode Read/Write args failed`、`Read path is required` 等报错，根因是**调用层参数 JSON 在解码阶段失败**（传输/序列化问题），不代表参数真的漏传，也不代表目标文件被写坏。
+
+误判链（要避免）：看到 `decode write args failed` → 误以为"漏传 text" → 盲目重发/补 text → 实际文件可能早已写入，反而覆盖或重复。
+
+正确处置顺序：
+
+1. **先验证是否落盘**，不要凭报错猜文件状态。用兜底读取（`grep`/`Shell nl`）确认文件是否已改、是否完整、是否被截断或清空。
+2. 已落盘且完整 → 报错是调用层噪声，**不重试**，继续下一步。
+3. 未落盘或不完整 → 保持内容不变原样重试一次；仍失败则换 `PatchEdit` 局部替换或分块写。
+4. `read_file` 持续 `decode Read args failed` 时，直接改用 `grep`/`Shell` 读取兜底，不反复空转。
+
+> 遇到本文未覆盖的新失败模式，验证清楚根因后再补进本规则，不臆测。
+
+## 空文件恢复：删除重建 + 种子内容 + PatchEdit
+
+当验证发现目标文件被写空或只落了残缺内容（Write 写空 / decode 失败留下空壳），不要反复对空文件整体 Write，改走这条稳定路径：
+
+1. `Delete` 掉这个空/残缺文件。
+2. 用 `Write` 重新创建，先只写一小段**种子内容**（如文件头、include、类骨架），规模小、易成功落盘。
+3. 回读确认种子已落盘完整。
+4. 之后所有内容用 `PatchEdit` 在种子基础上分段局部追加，避开一次性大 `Write` 的 `text` 遗漏/截断风险。
+
+> 本质：把"大整体写入"降级为"小种子 + 多次局部替换"，每步都可验证、可回退。
+
+## Read 专项：`limit: 0` 表示读取零行
+
+调用 `Read` 时不要显式传 `limit: 0`。该值表示“读取 0 行”，会返回 `isEmpty: true`，即使文件大小和总行数均非零，容易误判为空文件。
+
+- 小文件：使用有效正整数 `limit`（如 100、400），`offset` 从 1 开始。
+- 大文件：按实际需要分段读取，不用 0 表示“不限制”。
+- 若结果同时出现 `fileSize > 0`、`totalLines > 0` 与 `isEmpty: true`，先检查是否误传了 `limit: 0`，不要改写或删除文件。
+
+## 其他约束
+
+- 路径始终传**绝对路径**
+- 编辑前先 Read 确认文件存在
+- 大文件优先用 PatchEdit 做局部替换，避免整体 Write

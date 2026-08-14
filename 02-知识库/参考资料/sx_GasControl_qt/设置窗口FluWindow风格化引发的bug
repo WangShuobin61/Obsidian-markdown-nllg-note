@@ -1,0 +1,44 @@
+我已经定位到问题。先说清楚根因，再改。数据流与根因
+路，而是走FluWindow 内置的closelistener
+SettingsDialog 现在是一个独立的Fluindow，它的关闭行为不再走原来普通 window.close()的老
+点关闭X/调用close()onClosing- closelistener
+closelistener "iA: autoDestroy-false  > window.visibility = Window.Hidden + event.
+两个卡死场景的成因不同，但都和这条新链路有关:退出登录卡死:logoutConfirmDialog是modal:true的FluPopup.它的遮罩在「设置窗口的Overlay」上。当前onPositiveClicked 里在模态弹窗还没关闭、还持有输入抓取(grab)时就同步调用了settingsDialog.close()把整个设置窗口隐藏掉，模态grab没机会释放-输入被锁死-窗口卡死。
+点关闭x卡死:FluAppBar 的关闭按钮走 closeListener 默认的 visibility = Window.Hidden(并reject事件)。这条在WSL2/X11的无边框窗口上不稳定，隐藏后焦点回不到主窗口，表现为卡死。
+修复:给设置窗口一个明确的closeListener，用hide()干净隐藏并把激活权交还主窗口;退出登录时用Qt.cal1Later把关闭动作推迟到模态弹窗自身close()、释放grab之后再执行。
+
+
+全部改动已就位:
+(第102行)一启动时不再自动弹出
+1. autoVisible: false
+2.无自定义FluAppBar一重复标题栏已移除
+3.closelistener重写(第106-112行)一关闭走hide()并回交焦点，避免卡死
+4.logout用ot.cal1Later延迟关闭(第594-597行)一避开模态grab泄漏
+现在验证能否构建通过。先看终端状态。
+
+Shell 在当前环境里没有返回执行结果（连 `echo` 都没有回流），我无法运行 `qmllint` 或构建来做最终验证。代码改动本身已全部就位并核对过，但构建/运行验证这一步在这个环境里没法由我完成。
+
+已确认的三处修复（基于文件实际内容核对）：
+
+- **启动自动弹出** → `autoVisible: false`（第 102 行）。FluWindow 默认 `autoVisible: true` 会在创建即 `show()`，这正是设置页开机自弹的原因。
+- **双标题栏** → 文件中已无自定义 `FluAppBar`/标题栏，只保留 FluWindow 自带标题栏。
+- **关闭/退出卡死** → 根因是 FluWindow 默认 `closeListener` 把窗口置为 `visibility = Window.Hidden`，在 WSL2/X11 无边框窗口下丢焦点导致卡死。现重写为 `event.accepted = false` + `hide()` + 把激活权交回 `hostWindow`（第 106-112 行）；退出登录路径改用 `Qt.callLater` 延迟 `close()`，让模态弹窗先自行释放输入抓取再隐藏主窗口（第 594-597 行）。
+
+数据流（关闭路径）现在是：
+
+```
+用户点关闭/退出
+  → FluWindow.onClosing 触发 closeListener
+  → event.accepted=false（不真正销毁）
+  → settingsDialog.hide()
+  → hostWindow.raise()/requestActivate()（焦点回主窗口）
+```
+
+退出登录额外多一层延迟，避免模态 grab 与窗口隐藏在同一帧内竞争。
+
+需要你这边验证的点（我跑不了）：
+1. 在你的终端构建并运行，确认设置页开机不再自弹。
+2. 点右上角关闭按钮 → 窗口隐藏、主窗口重新可交互、无卡死。
+3. 点「退出登录」确认 → 不卡死，且 `logoutRequested` 正常触发到上层。
+
+如果第 2、3 步仍有卡死，请把运行时控制台输出贴出来——重点看是否还有早先那条 `dragArea is undefined` 的 `ReferenceError`，那会是另一条独立的线索。

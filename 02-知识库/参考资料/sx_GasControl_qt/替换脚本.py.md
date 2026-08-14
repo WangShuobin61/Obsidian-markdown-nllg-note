@@ -1,0 +1,185 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+import sys
+
+TS = "gas_control_bringup_en_US.ts"
+
+M = {
+    "【当前读数】%1，参考量程 %2。": "【Current Reading】%1, reference range %2.",
+    "【颜色与味道】%1": "【Color & Odor】%1",
+    "【不同浓度吸入危害】%1": "【Inhalation Hazard by Concentration】%1",
+    "【主要来源】%1": "【Main Sources】%1",
+    "【现场提醒】%1": "【On-site Reminder】%1",
+    "%1：%2": "%1: %2",
+
+    # CO 一氧化碳
+    "无色、无味、无刺激性，人体很难凭感官发现。": "Colorless, odorless and non-irritating; very hard for the human senses to detect.",
+    "低浓度可引起头痛、乏力；约 50-200 PPM 长时间暴露会出现明显不适；400 PPM 以上可能快速加重为恶心、意识模糊；800 PPM 以上存在昏迷和致命风险。": "Low concentrations can cause headache and fatigue; prolonged exposure around 50-200 PPM brings noticeable discomfort; above 400 PPM it can rapidly worsen to nausea and confusion; above 800 PPM there is a risk of coma and death.",
+    "燃油、燃气、煤炭、木材等不完全燃烧，发动机尾气，锅炉、炉具、密闭空间燃烧设备。": "Incomplete combustion of fuel, gas, coal and wood; engine exhaust; boilers, stoves and combustion equipment in enclosed spaces.",
+    "一氧化碳优先按缺氧和中毒风险处理，发现升高应立即通风、撤离并排查燃烧源。": "Treat carbon monoxide first as an asphyxiation and poisoning risk; if it rises, ventilate immediately, evacuate and check combustion sources.",
+
+    # O2 氧气
+    "无色、无味，是维持呼吸必需的气体。": "Colorless and odorless; the gas essential for breathing.",
+    "19.5%VOL 以下属于缺氧风险；16% 左右会出现呼吸急促、判断力下降；10%-12% 可导致昏迷；高于 23.5% 会显著增加燃烧和爆炸危险。": "Below 19.5%VOL is an oxygen-deficiency risk; around 16% causes rapid breathing and impaired judgment; 10%-12% can cause coma; above 23.5% significantly increases fire and explosion hazards.",
+    "空气本身约含 20.9%，受通风、惰性气体置换、燃烧消耗、泄漏富氧等因素影响。": "Air normally contains about 20.9%; this is affected by ventilation, inert-gas displacement, combustion consumption and oxygen-enriched leaks.",
+    "氧气异常时不要只看毒性，低氧和富氧都需要按高风险工况处理。": "When oxygen is abnormal, do not focus only on toxicity; both low and enriched oxygen must be treated as high-risk conditions.",
+
+    # H2S 硫化氢
+    "无色，低浓度有臭鸡蛋味，高浓度会麻痹嗅觉，不能依赖气味判断安全。": "Colorless, with a rotten-egg smell at low concentrations; high concentrations numb the sense of smell, so odor cannot be relied on to judge safety.",
+    "低浓度可刺激眼鼻喉；10-50 PPM 会头痛、恶心；100 PPM 以上嗅觉可能失灵；300 PPM 以上可快速造成呼吸损伤；更高浓度可迅速昏迷致命。": "Low concentrations irritate the eyes, nose and throat; 10-50 PPM causes headache and nausea; above 100 PPM the sense of smell may fail; above 300 PPM can rapidly cause respiratory damage; higher concentrations can quickly cause coma and death.",
+    "污水井、化粪池、沼气、石油天然气开采、含硫物料分解、纸浆和化工过程。": "Sewage wells, septic tanks, biogas, oil and gas extraction, decomposition of sulfur-containing materials, pulp and chemical processes.",
+    "硫化氢场景应优先考虑撤离、通风和呼吸防护，禁止盲目下井救援。": "In hydrogen sulfide situations, prioritize evacuation, ventilation and respiratory protection; never attempt blind rescue by entering a well.",
+
+    # CO2 二氧化碳
+    "无色、无味，浓度升高时会造成闷胀感和窒息风险。": "Colorless and odorless; rising concentrations cause stuffiness and a risk of asphyxiation.",
+    "约 1000 PPM 以上会感觉空气污浊；5000 PPM 是常见职业接触限值量级；3% 以上呼吸加深、头痛；5% 以上明显不适；8%-10% 可能短时间失去意识。": "Above about 1000 PPM the air feels stale; 5000 PPM is a typical occupational exposure limit; above 3% breathing deepens and headache appears; above 5% there is noticeable discomfort; 8%-10% may cause brief loss of consciousness.",
+    "人员呼吸、燃烧、发酵、干冰、消防系统、密闭空间积聚。": "Human respiration, combustion, fermentation, dry ice, fire-suppression systems, and accumulation in enclosed spaces.",
+    "二氧化碳升高常提示通风不足，密闭空间应同步关注氧气浓度。": "Rising carbon dioxide often indicates inadequate ventilation; in enclosed spaces, monitor oxygen concentration at the same time.",
+
+    # CH4 甲烷
+    "无色、通常无味，民用燃气味道多来自加臭剂。": "Colorless and usually odorless; the smell of domestic gas mostly comes from an added odorant.",
+    "低浓度主要是可燃风险；接近爆炸下限时危险显著上升；高浓度会置换氧气并导致缺氧窒息。": "At low concentrations the main risk is flammability; danger rises sharply near the lower explosive limit; high concentrations displace oxygen and cause asphyxiation.",
+    "天然气、沼气、煤矿瓦斯、垃圾填埋、污水处理、燃气管道泄漏。": "Natural gas, biogas, coal-mine gas, landfills, sewage treatment, and gas-pipeline leaks.",
+    "甲烷重点关注可燃爆炸和缺氧，不要在疑似泄漏环境中操作电气开关。": "For methane, focus on fire/explosion and oxygen deficiency; do not operate electrical switches in a suspected leak environment.",
+
+    # NH3 氨气
+    "无色，有强烈刺激性臭味，易溶于水。": "Colorless, with a strong pungent odor; highly soluble in water.",
+    "低浓度刺激眼鼻喉；25-50 PPM 已有明显不适；数百 PPM 可造成咳嗽、胸闷和灼伤；更高浓度可能导致肺水肿和生命危险。": "Low concentrations irritate the eyes, nose and throat; 25-50 PPM already causes noticeable discomfort; several hundred PPM can cause coughing, chest tightness and burns; higher concentrations may cause pulmonary edema and be life-threatening.",
+    "制冷系统、化肥、畜牧养殖、污水处理、清洁剂和含氨化工过程。": "Refrigeration systems, fertilizers, livestock farming, sewage treatment, cleaning agents and ammonia-related chemical processes.",
+    "氨气泄漏应避免进入低洼或封闭区域，优先通风并保护眼部和呼吸道。": "In an ammonia leak, avoid entering low-lying or enclosed areas; prioritize ventilation and protect the eyes and respiratory tract.",
+
+    # H2 氢气
+    "无色、无味，极易燃，火焰可能不易察觉。": "Colorless and odorless, extremely flammable; its flame may be hard to see.",
+    "本身毒性低，但高浓度会置换氧气导致缺氧；空气中达到可燃范围后遇静电、火花、热表面可爆燃。": "Low toxicity itself, but high concentrations displace oxygen and cause deficiency; once in the flammable range in air, static, sparks or hot surfaces can cause deflagration.",
+    "电池充电、制氢设备、氢气瓶、化工反应、金属酸洗、电解过程。": "Battery charging, hydrogen-generation equipment, hydrogen cylinders, chemical reactions, metal pickling and electrolysis.",
+    "氢气重点是泄漏扩散和点火源控制，应保持上部空间通风。": "For hydrogen, focus on leak dispersion and ignition-source control; keep the upper space ventilated.",
+
+    # SO2 二氧化硫
+    "无色，有强烈刺激性气味。": "Colorless, with a strong pungent odor.",
+    "低浓度刺激眼鼻喉；数 PPM 即可明显不适；20 PPM 以上可能咳嗽、胸闷；高浓度可导致支气管痉挛、肺水肿。": "Low concentrations irritate the eyes, nose and throat; a few PPM cause noticeable discomfort; above 20 PPM may cause coughing and chest tightness; high concentrations can cause bronchospasm and pulmonary edema.",
+    "含硫燃料燃烧、冶炼、硫酸生产、漂白、防腐和火山/地热释放。": "Combustion of sulfur-containing fuels, smelting, sulfuric-acid production, bleaching, preservation and volcanic/geothermal release.",
+    "二氧化硫对呼吸道刺激强，哮喘或呼吸系统敏感人群风险更高。": "Sulfur dioxide is strongly irritating to the airways; people with asthma or sensitive respiratory systems are at higher risk.",
+
+    # N2 氮气
+    "无色、无味，空气主要成分，本身惰性。": "Colorless and odorless, the main component of air, and inert itself.",
+    "氮气本身毒性低，但富集会置换氧气；氧气低于 19.5%VOL 出现缺氧风险，继续下降可导致判断力下降、昏迷甚至死亡。": "Nitrogen itself has low toxicity, but its build-up displaces oxygen; below 19.5%VOL oxygen there is an asphyxiation risk, and further decline can cause impaired judgment, coma and even death.",
+    "液氮、氮气瓶、惰化保护、管道吹扫、冷冻和实验室/工业用氮。": "Liquid nitrogen, nitrogen cylinders, inerting protection, pipeline purging, freezing, and laboratory/industrial nitrogen.",
+    "氮气危险常被低估，密闭空间内应以氧气读数作为关键判断。": "Nitrogen's hazard is often underestimated; in enclosed spaces, use the oxygen reading as the key indicator.",
+
+    # HCHO 甲醛
+    "无色，有强烈刺激性气味，易刺激眼鼻喉。": "Colorless, with a strong pungent odor; readily irritates the eyes, nose and throat.",
+    "低浓度可引起流泪、咽喉不适；0.1 PPM 附近部分人群已有刺激感；更高浓度会导致咳嗽、胸闷、皮肤和黏膜刺激，长期暴露存在健康风险。": "Low concentrations can cause tearing and throat discomfort; near 0.1 PPM some people already feel irritation; higher concentrations cause coughing, chest tightness and skin/mucous-membrane irritation, with health risks from long-term exposure.",
+    "装修材料、人造板、胶黏剂、消毒防腐用品、燃烧烟气和部分工业过程。": "Renovation materials, manufactured boards, adhesives, disinfection and preservation products, combustion fumes and some industrial processes.",
+    "甲醛更适合结合时间加权暴露评估，短时峰值和长期低浓度都需要关注。": "Formaldehyde is best assessed with time-weighted exposure; both short-term peaks and long-term low concentrations need attention.",
+
+    # O3 臭氧
+    "淡蓝色气体，低浓度有类似雷雨后的特殊气味，强氧化性。": "A pale-blue gas; at low concentrations it has a distinctive smell like after a thunderstorm, and is strongly oxidizing.",
+    "低浓度刺激眼鼻喉；0.1 PPM 附近可能引发咳嗽和胸闷；更高浓度会损伤呼吸道，运动或重体力活动会加重影响。": "Low concentrations irritate the eyes, nose and throat; near 0.1 PPM it may trigger coughing and chest tightness; higher concentrations damage the airways, and exercise or heavy exertion worsens the effect.",
+    "臭氧发生器、紫外设备、高压电气放电、光化学烟雾和消毒过程。": "Ozone generators, UV equipment, high-voltage electrical discharge, photochemical smog and disinfection processes.",
+    "臭氧不能靠闻到味道才处理，使用臭氧设备后应充分通风并等待分解。": "Do not wait until you can smell ozone before acting; after using ozone equipment, ventilate thoroughly and allow time for it to decompose.",
+
+    # VOC
+    "通常为多种挥发性有机物混合物，颜色和味道取决于具体成分，常见为溶剂味、油漆味或芳香味。": "Usually a mixture of several volatile organic compounds; color and odor depend on the specific components, commonly a solvent, paint or aromatic smell.",
+    "低浓度可引起头晕、眼鼻刺激；浓度升高会造成头痛、恶心、嗜睡；部分成分长期暴露存在肝肾、神经系统或致癌风险。": "Low concentrations can cause dizziness and eye/nose irritation; higher concentrations cause headache, nausea and drowsiness; long-term exposure to some components carries liver/kidney, nervous-system or cancer risks.",
+    "油漆、胶黏剂、清洁剂、汽油、溶剂、装修材料、印刷和化工生产。": "Paint, adhesives, cleaning agents, gasoline, solvents, renovation materials, printing and chemical production.",
+    "VOC 是综合指标，异常时应结合现场材料、作业内容和通风状态追溯具体来源。": "VOC is a composite indicator; when abnormal, trace the specific source together with on-site materials, the work being done and the ventilation status.",
+
+    # TVOC
+    "总挥发性有机物指标，通常无单一颜色和味道，取决于混合成分。": "A total-volatile-organic-compounds indicator; usually has no single color or odor, depending on the mixed components.",
+    "低水平可能造成异味和轻微刺激；升高后可能出现头痛、眼鼻喉不适、恶心；长期暴露风险取决于其中苯系物、醛类等具体成分。": "Low levels may cause odor and mild irritation; once elevated they may cause headache, eye/nose/throat discomfort and nausea; long-term risk depends on specific components such as benzene homologs and aldehydes.",
+    "装修材料、家具、胶黏剂、涂料、清洁剂、燃油和工业溶剂。": "Renovation materials, furniture, adhesives, coatings, cleaning agents, fuel and industrial solvents.",
+    "TVOC 升高说明挥发源或通风存在问题，建议结合单项气体和现场工况判断。": "A rise in TVOC indicates a problem with the emission source or ventilation; assess it together with individual gas readings and on-site conditions.",
+
+    # 苯 benzene
+    "无色透明，有芳香气味，易挥发、易燃。": "Colorless and transparent, with an aromatic odor; volatile and flammable.",
+    "低浓度可导致头晕、嗜睡；较高浓度会恶心、意识模糊；长期暴露会损害造血系统，并存在明确致癌风险。": "Low concentrations can cause dizziness and drowsiness; higher concentrations cause nausea and confusion; long-term exposure damages the blood-forming system and carries a clear cancer risk.",
+    "汽油、油漆、胶黏剂、溶剂、化工原料、烟草烟雾和部分装修材料。": "Gasoline, paint, adhesives, solvents, chemical feedstocks, tobacco smoke and some renovation materials.",
+    "苯不应只按气味判断，长期低浓度暴露也需要严肃控制。": "Benzene should not be judged by smell alone; long-term low-concentration exposure also requires serious control.",
+
+    # PH3 磷化氢
+    "无色，常有鱼腥或蒜臭味，极毒且可燃。": "Colorless, often with a fishy or garlic-like smell; highly toxic and flammable.",
+    "低浓度即可引发头痛、胸闷、恶心；浓度升高可能导致肺水肿、抽搐、休克；高浓度短时暴露可致命。": "Even low concentrations can cause headache, chest tightness and nausea; higher concentrations may cause pulmonary edema, convulsions and shock; short-term high-concentration exposure can be fatal.",
+    "粮仓熏蒸、磷化铝/磷化锌遇水反应、半导体和化工过程。": "Grain fumigation, aluminum/zinc phosphide reacting with water, semiconductor and chemical processes.",
+    "磷化氢风险高且发展快，疑似场景应由专业人员佩戴合适呼吸防护处置。": "Phosphine is high-risk and develops quickly; suspected situations should be handled by professionals wearing appropriate respiratory protection.",
+
+    # HF 氟化氢
+    "无色，有强刺激性气味，极强腐蚀性。": "Colorless, with a strong pungent odor and extremely corrosive.",
+    "低浓度刺激眼鼻喉；较高浓度可造成深部组织损伤和严重呼吸道灼伤；皮肤接触也可能引发全身性毒性。": "Low concentrations irritate the eyes, nose and throat; higher concentrations can cause deep-tissue damage and severe airway burns; skin contact can also cause systemic toxicity.",
+    "含氟化工、玻璃蚀刻、半导体、铝冶炼、制冷剂分解和部分电池事故。": "Fluorine chemistry, glass etching, semiconductors, aluminum smelting, refrigerant decomposition and some battery accidents.",
+    "氟化氢不仅是吸入风险，也是强腐蚀风险，应避免任何无防护接触。": "Hydrogen fluoride is not only an inhalation risk but also a strong corrosion risk; avoid any unprotected contact.",
+
+    # HCl 氯化氢
+    "无色至微黄色，有强烈刺激性酸味，遇湿空气可形成白雾。": "Colorless to slightly yellow, with a strong pungent acidic smell; forms a white mist in humid air.",
+    "低浓度刺激眼鼻喉；数十 PPM 可明显咳嗽、胸闷；高浓度会造成呼吸道灼伤、肺水肿。": "Low concentrations irritate the eyes, nose and throat; tens of PPM cause marked coughing and chest tightness; high concentrations cause airway burns and pulmonary edema.",
+    "盐酸挥发、氯化工、金属酸洗、PVC 等含氯材料燃烧或热分解。": "Hydrochloric-acid evaporation, chlorine chemistry, metal pickling, and combustion or thermal decomposition of chlorine-containing materials such as PVC.",
+    "氯化氢遇水形成盐酸雾，处置时要同时考虑腐蚀和吸入危害。": "Hydrogen chloride forms hydrochloric-acid mist with water; handle it considering both corrosion and inhalation hazards.",
+
+    # Cl2 氯气
+    "黄绿色气体，有强烈刺激性气味，密度大于空气。": "A yellow-green gas with a strong pungent odor, denser than air.",
+    "低浓度刺激眼鼻喉；1-3 PPM 可明显不适；10 PPM 以上咳嗽胸闷加重；高浓度可导致肺水肿甚至致命。": "Low concentrations irritate the eyes, nose and throat; 1-3 PPM causes noticeable discomfort; above 10 PPM coughing and chest tightness worsen; high concentrations can cause pulmonary edema and even death.",
+    "消毒剂、漂白剂误混、氯气瓶、泳池消毒、化工和水处理过程。": "Disinfectant/bleach accidentally mixed, chlorine cylinders, pool disinfection, chemical and water-treatment processes.",
+    "氯气易在低处积聚，撤离时应远离泄漏源并避免进入下风低洼处。": "Chlorine tends to accumulate in low areas; when evacuating, move away from the leak source and avoid low-lying downwind areas.",
+
+    # NO 一氧化氮
+    "无色，较易在空气中氧化为红棕色二氧化氮。": "Colorless; readily oxidizes in air into reddish-brown nitrogen dioxide.",
+    "低浓度可能刺激不明显；氧化生成 NO2 后呼吸道危害明显；较高浓度可影响血液携氧并造成肺部损伤。": "At low concentrations irritation may be slight; after oxidizing into NO2 the airway hazard becomes clear; higher concentrations can impair oxygen transport in blood and damage the lungs.",
+    "燃烧、高温焊接、发动机尾气、硝酸相关工艺和爆破烟气。": "Combustion, high-temperature welding, engine exhaust, nitric-acid-related processes and blasting fumes.",
+    "一氧化氮现场通常要连同二氧化氮一起评估，延迟性肺损伤不能忽视。": "Nitric oxide on-site is usually assessed together with nitrogen dioxide; delayed lung injury must not be ignored.",
+
+    # NO2 二氧化氮
+    "红棕色气体，有强烈刺激性气味。": "A reddish-brown gas with a strong pungent odor.",
+    "低浓度刺激眼鼻喉；数 PPM 可引起咳嗽、胸闷；较高浓度可能导致迟发性肺水肿；高浓度短时暴露可危及生命。": "Low concentrations irritate the eyes, nose and throat; a few PPM can cause coughing and chest tightness; higher concentrations may cause delayed pulmonary edema; short-term high-concentration exposure can be life-threatening.",
+    "柴油尾气、焊接、燃烧、硝酸工业、爆破烟气和谷仓气体。": "Diesel exhaust, welding, combustion, nitric-acid industry, blasting fumes and silo gas.",
+    "二氧化氮存在延迟发作风险，暴露后即使短时好转也应持续观察。": "Nitrogen dioxide carries a delayed-onset risk; after exposure, keep observing even if symptoms briefly improve.",
+
+    # 其他可燃气体 combustible
+    "其他可燃气体的颜色和味道取决于成分，很多本身无色无味。": "The color and odor of other combustible gases depend on their composition; many are colorless and odorless.",
+    "低浓度主要关注泄漏趋势；接近爆炸下限时燃爆风险快速上升；高浓度还可能置换氧气造成缺氧。": "At low concentrations focus on the leak trend; near the lower explosive limit the fire/explosion risk rises rapidly; high concentrations can also displace oxygen and cause deficiency.",
+    "燃气、溶剂蒸气、油气挥发、沼气、工业可燃气体和未知混合泄漏。": "Fuel gas, solvent vapor, oil-and-gas evaporation, biogas, industrial combustible gases and unknown mixed leaks.",
+    "可燃气体异常时先控制点火源、加强通风并撤离无关人员，再定位泄漏。": "When combustible gas is abnormal, first control ignition sources, increase ventilation and evacuate non-essential personnel, then locate the leak.",
+
+    # fallback 通用兜底
+    "%1的颜色和味道需要结合具体物质属性确认，不能只依赖嗅觉判断安全。": "The color and odor of %1 must be confirmed against the specific substance's properties; do not rely on smell alone to judge safety.",
+    "低浓度可能仅表现为异味或轻微刺激；浓度升高后可能造成呼吸道刺激、头晕、恶心、缺氧或其他毒性影响；高浓度短时暴露存在急性风险。": "Low concentrations may appear only as an odor or mild irritation; higher concentrations may cause airway irritation, dizziness, nausea, oxygen deficiency or other toxic effects; short-term high-concentration exposure carries acute risk.",
+    "可能来自工艺泄漏、燃烧或分解产物、储罐/管道、清洁剂、溶剂、装修材料或密闭空间积聚。": "May come from process leaks, combustion or decomposition products, tanks/pipelines, cleaning agents, solvents, renovation materials or accumulation in enclosed spaces.",
+    "建议结合现场工况、通风条件、报警阈值和个人防护要求综合判断。": "Assess comprehensively together with on-site conditions, ventilation, alarm thresholds and personal-protection requirements.",
+}
+
+
+def esc(s):
+    return (s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
+
+
+def main():
+    with open(TS, encoding="utf-8") as f:
+        text = f.read()
+
+    filled = 0
+    missing = []
+    for zh, en in M.items():
+        src = "<source>%s</source>" % esc(zh)
+        idx = text.find(src)
+        if idx < 0:
+            missing.append(zh)
+            continue
+        block = "<translation type=\"unfinished\"></translation>"
+        bidx = text.find(block, idx)
+        if bidx < 0:
+            missing.append(zh)
+            continue
+        repl = "<translation>%s</translation>" % esc(en)
+        text = text[:bidx] + repl + text[bidx + len(block):]
+        filled += 1
+
+    with open(TS, "w", encoding="utf-8") as f:
+        f.write(text)
+
+    print("filled:", filled, "of", len(M))
+    if missing:
+        print("MISSING:")
+        for m in missing:
+            print("  ", m)
+
+
+if __name__ == "__main__":
+    main()
