@@ -215,6 +215,10 @@ docker run -it --rm \
     gas_control
 ```
 
+```
+CleanSilt
+```
+
 进容器后，用你平时一模一样的命令：
 
 ```bash
