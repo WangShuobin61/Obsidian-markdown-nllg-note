@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>ROS2 机器人监控 - rosbridge 测试</title>
+<style>
+  body { font-family: 'Microsoft YaHei', sans-serif; margin: 30px; background: #1a1a2e; color: #eee; }
+  h2 { color: #e94560; }
+  pre { background: #16213e; padding: 20px; border-radius: 8px; min-height: 100px; font-size: 14px; }
+  .status { padding: 8px 16px; border-radius: 4px; margin: 10px 0; display: inline-block; }
+  .connected { background: #0f3460; color: #00ff88; }
+  .disconnected { background: #0f3460; color: #e94560; }
+</style>
+</head>
+<body>
+
+<h2>🤖 ROS2 机器人传感器数据</h2>
+<div id="status" class="status disconnected">❌ 未连接</div>
+<pre id="data">等待连接 ws://localhost:9090 ...</pre>
+
+<script>
+const ws = new WebSocket('ws://localhost:9090');
+
+ws.onopen = () => {
+  document.getElementById('status').className = 'status connected';
+  document.getElementById('status').innerText = '✅ 已连接';
+  document.getElementById('data').innerText = '连接成功，正在订阅话题...';
+
+  // 也订阅原始话题
+  ws.send(JSON.stringify({
+    op: 'subscribe',
+    topic: '/gas_concentration',
+    type: 'sx_gas_msgs/GasConcentration'
+  }));
+  ws.send(JSON.stringify({
+    op: 'subscribe',
+    topic: '/battery_status',
+    type: 'sx_gas_msgs/BatteryStatus'
+  }));
+  ws.send(JSON.stringify({
+    op: 'subscribe',
+    topic: '/environment',
+    type: 'sx_gas_msgs/Environment'
+  }));
+
+  document.getElementById('data').innerText = '等待数据中...';
+};
+
+ws.onmessage = (e) => {
+  const data = JSON.parse(e.data);
+  const text = JSON.stringify(data, null, 2);
+  document.getElementById('data').innerText = text;
+  console.log('📩', data);
+};
+
+ws.onerror = () => {
+  document.getElementById('data').innerText =
+    '❌ 连接失败\n\n'
+    + '请确认 rosbridge 已在运行：\n'
+    + '  ros2 launch sx_gas_qt_bridge rosbridge_bringup.launch.py\n\n'
+    + '如果仍然不行，检查 rosbridge 是否在 9090 端口：\n'
+    + '  ss -tlnp | grep 9090';
+};
+
+ws.onclose = () => {
+  document.getElementById('status').className = 'status disconnected';
+  document.getElementById('status').innerText = '❌ 已断开';
+};
+</script>
+
+</body>
+</html>
